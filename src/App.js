@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { ApolloProvider } from 'react-apollo';
-import ApolloClient from 'apollo-boost';
+import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './components/header';
@@ -10,6 +10,9 @@ import NuevoCliente from './components/nuevoCliente';
 
 const client = new ApolloClient({
 	uri: 'http://localhost:7001/graphql',
+	cache: new InMemoryCache({
+		addTypename: false
+	}),
 	onError: ({ networkError, graphQLErrors }) => {
 		console.log(`graphQLErrors :  ${graphQLErrors}`);
 		console.log(`networkError :  ${networkError}`);
