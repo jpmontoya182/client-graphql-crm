@@ -27,3 +27,26 @@ export const CLIENTE_QUERY = gql`
 		}
 	}
 `;
+
+export const PRODUCTOS_QUERY = gql`
+	query obtenerProductos($limite: Int, $offset: Int) {
+		obtenerProductos(limite: $limite, offset: $offset) {
+			id
+			nombre
+			stock
+			precio
+		}
+		totalProductos
+	}
+`;
+
+export const PRODUCTO_QUERY = gql`
+	query obtenerProducto($id: ID!) {
+		obtenerProducto(id: $id) {
+			id
+			nombre
+			precio
+			stock
+		}
+	}
+`;

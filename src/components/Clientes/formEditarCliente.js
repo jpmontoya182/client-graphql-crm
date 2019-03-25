@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ACTUALIZAR_CLIENTE } from '../mutations';
+import { ACTUALIZAR_CLIENTE } from '../../mutations';
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 
@@ -47,7 +47,7 @@ class FormularioEditarCliente extends Component {
 		return (
 			<Mutation
 				mutation={ACTUALIZAR_CLIENTE}
-				onCompleted={() => this.props.refetch().then(() => this.props.history.push('/'))}
+				onCompleted={() => this.props.refetch().then(() => this.props.history.push('/clientes'))}
 			>
 				{(actualizarCliente) => (
 					<form

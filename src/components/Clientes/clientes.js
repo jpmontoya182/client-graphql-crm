@@ -1,9 +1,10 @@
 import React, { Fragment, Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
-import { CLIENTES_QUERY } from '../queries';
+import { CLIENTES_QUERY } from '../../queries';
 import { Link } from 'react-router-dom';
-import { ELIMINAR_CLIENTE } from '../mutations';
-import Paginador from '../components/paginador';
+import { ELIMINAR_CLIENTE } from '../../mutations';
+import Paginador from '../Share/paginador';
+import { MensajeExito } from '../Share/alertas';
 
 class Contactos extends Component {
 	limite = 3;
@@ -11,6 +12,10 @@ class Contactos extends Component {
 		paginador: {
 			offset: 0,
 			actual: 1
+		},
+		alerta: {
+			mostrar: false,
+			mensaje: ''
 		}
 	};
 
@@ -33,6 +38,9 @@ class Contactos extends Component {
 	};
 
 	render() {
+		const { alerta: { mostrar, mensaje } } = this.state;
+		const alerta = mostrar ? <MensajeExito mensaje={mensaje} /> : '';
+
 		return (
 			<Query
 				query={CLIENTES_QUERY}
@@ -45,6 +53,7 @@ class Contactos extends Component {
 					return (
 						<Fragment>
 							<h2 className="text-center">Listado Clientes</h2>
+							{alerta}
 							<ul className="list-group mt-4">
 								{data.obtenerClientes.map((item) => {
 									const { id } = item;
@@ -55,7 +64,30 @@ class Contactos extends Component {
 													{item.nombre} {item.apellido} - {item.empresa}
 												</div>
 												<div className="col-md-4 d-flex justify-content-end">
-													<Mutation mutation={ELIMINAR_CLIENTE}>
+													<Mutation
+														mutation={ELIMINAR_CLIENTE}
+														onCompleted={(data) => {
+															console.log(data);
+															this.setState(
+																{
+																	alerta: {
+																		mostrar: true,
+																		mensaje: data.eliminarCliente
+																	}
+																},
+																() => {
+																	setTimeout(() => {
+																		this.setState({
+																			alerta: {
+																				mostrar: false,
+																				mensaje: ''
+																			}
+																		});
+																	}, 3000);
+																}
+															);
+														}}
+													>
 														{(eliminarCliente) => (
 															<button
 																type="button"
@@ -73,7 +105,7 @@ class Contactos extends Component {
 														)}
 													</Mutation>
 													<Link
-														to={`/cliente/editar/${item.id}`}
+														to={`/clientes/editar/${item.id}`}
 														className="btn btn-success d-block d-md-inline-block"
 													>
 														Editar
@@ -86,7 +118,7 @@ class Contactos extends Component {
 							</ul>
 							<Paginador
 								actual={this.state.paginador.actual}
-								totalClientes={data.totalClientes}
+								total={data.totalClientes}
 								limite={this.limite}
 								paginaAnterior={this.paginaAnterior}
 								paginaSiguiente={this.paginaSiguiente}

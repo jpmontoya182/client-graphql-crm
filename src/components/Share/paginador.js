@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 class Paginador extends Component {
 	state = {
 		paginador: {
-			paginas: Math.ceil(Number(this.props.totalClientes) / this.props.limite)
+			paginas: Math.ceil(Number(this.props.total) / this.props.limite)
 		}
 	};
 	render() {
@@ -14,7 +14,14 @@ class Paginador extends Component {
 					&laquo; Anterior
 				</button>
 			) : (
-				''
+				<button
+					type="button"
+					className="btn btn-default mr-2"
+					onClick={this.props.paginaAnterior}
+					disabled={true}
+				>
+					&laquo; Anterior
+				</button>
 			);
 		const { paginas } = this.state.paginador;
 		const btnSiguiente =
@@ -23,7 +30,9 @@ class Paginador extends Component {
 					Siguiente &raquo;
 				</button>
 			) : (
-				''
+				<button type="button" className="btn btn-default" onClick={this.props.paginaSiguiente} disabled={true}>
+					Siguiente &raquo;
+				</button>
 			);
 
 		return (
