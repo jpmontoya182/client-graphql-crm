@@ -55,3 +55,17 @@ export const ACTUALIZAR_PRODUCTO = gql`
 		}
 	}
 `;
+
+export const NUEVO_PEDIDO = gql`
+	mutation crearPedido($input: PedidoInput) {
+		crearPedido(input: $input) {
+			id
+			fecha
+			total
+			pedidos {
+				id
+				cantidad
+			}
+		}
+	}
+`;
