@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import DatosCliente from './datosCliente';
 import { Query } from 'react-apollo';
 import { PRODUCTOS_QUERY } from '../../queries';
-import './nuevoPedido.css';
+import './spinner.css';
 import ContenidoPedido from './contenidoPedido';
 
 class NuevoPedido extends Component {
