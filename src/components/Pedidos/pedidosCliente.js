@@ -11,7 +11,7 @@ function PedidosCliente(props) {
 		<Fragment>
 			<h1 className="text-center mb-5">Pedidos Cliente</h1>
 			<div className="row">
-				<Query query={OBTENER_PEDIDO} variables={{ cliente }} pollInterval={5000}>
+				<Query query={OBTENER_PEDIDO} variables={{ cliente }} pollInterval={1000}>
 					{({ loading, error, data, startPolling, stopPolling }) => {
 						if (loading)
 							return (

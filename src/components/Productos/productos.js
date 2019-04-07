@@ -70,9 +70,18 @@ class Productos extends Component {
 								</thead>
 								<tbody>
 									{data.obtenerProductos.map((producto) => {
-										const { id } = producto;
+										const { id, stock } = producto;
+
+										let clase;
+
+										if (stock < 10) {
+											clase = 'table-danger text-light';
+										} else if (stock >= 11 && stock < 20) {
+											clase = 'table-warning text-light';
+										}
+
 										return (
-											<tr key={id}>
+											<tr key={id} className={clase}>
 												<td>{producto.nombre}</td>
 												<td>{producto.precio}</td>
 												<td>{producto.stock}</td>

@@ -69,3 +69,23 @@ export const NUEVO_PEDIDO = gql`
 		}
 	}
 `;
+
+export const ACTUALIZAR_ESTADO = gql`
+	mutation actualizarEstado($input: PedidoInput) {
+		actualizarEstado(input: $input)
+	}
+`;
+
+export const NUEVO_USUARIO = gql`
+	mutation crearUsuario($usuario: String!, $nombre: String!, $password: String!, $rol: String!) {
+		crearUsuario(usuario: $usuario, nombre: $nombre, password: $password, rol: $rol)
+	}
+`;
+
+export const AUTENTICAR_USUARIO = gql`
+	mutation autenticarUsuario($usuario: String!, $password: String!) {
+		autenticarUsuario(usuario: $usuario, password: $password) {
+			token
+		}
+	}
+`;
