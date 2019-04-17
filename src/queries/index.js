@@ -1,14 +1,14 @@
 import gql from 'graphql-tag';
 
 export const CLIENTES_QUERY = gql`
-	query obtenerClientes($limite: Int, $offset: Int) {
-		obtenerClientes(limite: $limite, offset: $offset) {
+	query obtenerClientes($limite: Int, $offset: Int, $vendedor: String) {
+		obtenerClientes(limite: $limite, offset: $offset, vendedor: $vendedor) {
 			id
 			nombre
 			apellido
 			empresa
 		}
-		totalClientes
+		totalClientes(vendedor: $vendedor)
 	}
 `;
 
@@ -87,6 +87,17 @@ export const USUARIO_ACTUAL = gql`
 			usuario
 			nombre
 			rol
+		}
+	}
+`;
+
+export const TOP_VENDEDORES = gql`
+	query topVendedores {
+		topVendedores {
+			total
+			vendedor {
+				nombre
+			}
 		}
 	}
 `;

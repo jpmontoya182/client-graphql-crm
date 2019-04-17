@@ -89,7 +89,12 @@ class ContenidoPedido extends Component {
 					Total :
 					<span className="font-weight-bold">$ {this.state.total}</span>
 				</p>
-				<GenerarPedido productos={this.state.productos} total={this.state.total} clienteId={this.props.id} />
+				<GenerarPedido
+					productos={this.state.productos}
+					total={this.state.total}
+					clienteId={this.props.id}
+					vendedor={this.props.vendedor}
+				/>
 			</Fragment>
 		);
 	}

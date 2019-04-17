@@ -65,7 +65,7 @@ export const NUEVO_PEDIDO = gql`
 			pedidos {
 				id
 				cantidad
-			}
+			}			
 		}
 	}
 `;

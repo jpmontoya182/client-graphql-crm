@@ -40,12 +40,19 @@ class Contactos extends Component {
 	render() {
 		const { alerta: { mostrar, mensaje } } = this.state;
 		const alerta = mostrar ? <MensajeExito mensaje={mensaje} /> : '';
-
+		// obtiene el id del vendedor
+		let vendedor;
+		const { rol } = this.props.session.obtenerUsuario;
+		if (rol === 'Vendedor') {
+			vendedor = this.props.session.obtenerUsuario.id;
+		} else {
+			vendedor = '';
+		}
 		return (
 			<Query
 				query={CLIENTES_QUERY}
 				pollInterval={2000}
-				variables={{ limite: this.limite, offset: this.state.paginador.offset }}
+				variables={{ limite: this.limite, offset: this.state.paginador.offset, vendedor }}
 			>
 				{({ loading, error, data, startPolling, stopPolling }) => {
 					if (loading) return 'Cargando ...';

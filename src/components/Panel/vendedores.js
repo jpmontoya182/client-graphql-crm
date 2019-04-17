@@ -1,21 +1,21 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-import { TOP_CLIENTES } from '../../queries';
+import { TOP_VENDEDORES } from '../../queries';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
-const Clientes = () => {
+const Vendedores = () => {
 	return (
-		<Query query={TOP_CLIENTES}>
+		<Query query={TOP_VENDEDORES}>
 			{({ loading, error, data }) => {
 				if (loading) return 'Cargando...';
 				if (error) return `Error : ${error.message}`;
 
-				const topClientesGrafica = [];
+				const topVendedoresGrafica = [];
 
-				data.topClientes.map((pedido, index) => {
-					topClientesGrafica[index] = {
-						...pedido.cliente[0],
-						total: pedido.total
+				data.topVendedores.map((venta, index) => {
+					topVendedoresGrafica[index] = {
+						...venta.vendedor[0],
+						total: venta.total
 					};
 				});
 
@@ -24,7 +24,7 @@ const Clientes = () => {
 						<BarChart
 							width={600}
 							height={300}
-							data={topClientesGrafica}
+							data={topVendedoresGrafica}
 							margin={{
 								top: 5,
 								right: 30,
@@ -36,7 +36,7 @@ const Clientes = () => {
 							<XAxis dataKey="nombre" />
 							<YAxis />
 							<Tooltip />
-							<Bar dataKey="total" fill="#10a98b" />
+							<Bar dataKey="total" fill="#2248c9" />
 						</BarChart>
 					</div>
 				);
@@ -45,4 +45,4 @@ const Clientes = () => {
 	);
 };
 
-export default Clientes;
+export default Vendedores;

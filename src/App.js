@@ -31,19 +31,19 @@ const App = ({ refetch, session }) => {
 				<div className="container">
 					<p className="text-right">{mensaje}</p>
 					<Switch>
-						<Route exact path="/clientes" component={Clientes} />
-						<Route exact path="/clientes/nuevo" component={NuevoCliente} />
+						<Route exact path="/clientes" render={() => <Clientes session={session} />} />
+						<Route exact path="/clientes/nuevo" render={() => <NuevoCliente session={session} />} />
 						<Route exact path="/clientes/editar/:id" component={EditarCliente} />
 
 						<Route exact path="/productos" component={Productos} />
 						<Route exact path="/productos/nuevo" component={NuevoProducto} />
 						<Route exact path="/productos/editar/:id" component={EditarProducto} />
-						<Route exact path="/pedidos/nuevo/:id" component={NuevoPedido} />
+						<Route exact path="/pedidos/nuevo/:id" render={() => <NuevoPedido session={session} />} />
 						<Route exact path="/pedidos/:id" component={PedidosCliente} />
 
 						<Route exact path="/panel" component={Panel} />
 
-						<Route exact path="/registro" component={Registro} />
+						<Route exact path="/registro" render={() => <Registro session={session} />} />
 						<Route exact path="/login" render={() => <Login refetch={refetch} />} />
 					</Switch>
 				</div>

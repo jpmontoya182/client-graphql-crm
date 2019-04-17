@@ -3,6 +3,7 @@ import { Query, Mutation } from 'react-apollo';
 import { ACTUALIZAR_ESTADO } from '../../mutations';
 import { PRODUCTO_QUERY } from '../../queries';
 import ResumenProducto from './resumenProducto';
+import './pedido.css';
 
 const Pedido = (props) => {
 	const { pedido: { id, pedidos, fecha, total, estado, cliente } } = props;
@@ -64,12 +65,8 @@ const Pedido = (props) => {
 						Fecha Pedido:
 						<span className="font-weight-normal"> {fechaT.toLocaleString('es-CO')}</span>
 					</p>
-					<p className="card-text font-weight-bold">
-						Total:
-						<span className="font-weight-normal"> $ {total} </span>
-					</p>
 
-					<h3 className="card-text text-center mb-3">Artículos del pedido</h3>
+					<h3 className="card-text text-center mb-3 resaltar-texto">Artículos del pedido</h3>
 					{pedidos.map((producto, index) => {
 						const { id } = producto;
 						return (
@@ -89,6 +86,10 @@ const Pedido = (props) => {
 							</Query>
 						);
 					})}
+					<div className="d-flex align-items-center justify-content-end">
+						<p className="card-text mr-1 bg-amarillo">Total:</p>
+						<p className="font-weight-normal inc-texto"> $ {total} </p>
+					</div>
 				</div>
 			</div>
 		</div>
